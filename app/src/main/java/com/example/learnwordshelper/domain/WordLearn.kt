@@ -1,6 +1,7 @@
 package com.example.learnwordshelper.domain
 
-class WordLearn(
+data class WordLearn(
+    val id : Int,
     val word : String
 ) {
 }

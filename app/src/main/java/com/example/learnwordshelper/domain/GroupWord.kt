@@ -1,4 +1,9 @@
 package com.example.learnwordshelper.domain
 
-class GroupWord {
+data class GroupWord(
+    val id : Int,
+    var openStatus : Boolean,
+    var name : String
+) {
+
 }

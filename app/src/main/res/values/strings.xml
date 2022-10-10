@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LearnWordsHelper</string>
+
+
+
+    //xml - size
+    <string name="group_close_height">180dp</string>
 </resources>

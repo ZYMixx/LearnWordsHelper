@@ -2,26 +2,42 @@ package com.example.learnwordshelper.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.learnwordshelper.R
-import com.example.learnwordshelper.data.AppDatabase
-import com.example.learnwordshelper.data.WordLearnDbModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.learnwordshelper.databinding.ActivityMainBinding
+import com.example.learnwordshelper.domain.GroupWord
+import com.example.learnwordshelper.presentation.adapter.WordLearnListAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var viewModel : MainScreenViewModel
+    private lateinit var rvAdapter : WordLearnListAdapter
     private val scope = CoroutineScope(Dispatchers.IO)
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        setUpRV()
+        setUpViewModel()
 
-        scope.launch {
-            AppDatabase.getInstance(applicationContext).wordLearnDao().addLearnWord(
-                WordLearnDbModel(0, "TheardWord")
-            )
+    }
+
+    private fun setUpViewModel() {
+        viewModel = ViewModelProvider(this)[MainScreenViewModel::class.java]
+        viewModel.groupWordListLD.observe(this){
+            rvAdapter.submitList(it)
+        }
+    }
+
+    private fun setUpRV() {
+        rvAdapter = WordLearnListAdapter(this)
+        binding.mainRv.adapter = rvAdapter
+        rvAdapter.onGroupClickListener = {
+            viewModel.changeOpenStatus(it)
         }
 
     }

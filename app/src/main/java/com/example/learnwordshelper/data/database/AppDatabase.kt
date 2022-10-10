@@ -1,11 +1,13 @@
-package com.example.learnwordshelper.data
+package com.example.learnwordshelper.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.learnwordshelper.data.database.dbmodel.GroupWordDbModel
+import com.example.learnwordshelper.data.database.dbmodel.WordLearnDbModel
 
-@Database (entities = [WordLearnDbModel::class], version = 1)
+@Database (entities = [WordLearnDbModel::class, GroupWordDbModel::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
@@ -22,6 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
                         AppDatabase::class.java,
                         DB_NAME
                     )
+                        .fallbackToDestructiveMigration()
                         .build()
                 db = instance
                 return instance
@@ -30,5 +33,6 @@ abstract class AppDatabase : RoomDatabase() {
     }
 
     abstract fun wordLearnDao() : WordLearnDao
+    abstract fun groupWordDao() : GroupWordDao
 
 }
