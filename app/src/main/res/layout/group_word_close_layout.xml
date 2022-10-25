@@ -31,12 +31,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="left|top"
-            android:textSize="28dp"
+            android:textSize="26dp"
             app:layout_constraintEnd_toEndOf="@+id/guideline_name"
             app:layout_constraintRight_toRightOf="@id/guideline_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Groupname" />
+            tools:text="GroupName"
+            />
 
         <TextView
             android:maxLines="2"
@@ -47,13 +48,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_group_name"
             app:layout_constraintRight_toLeftOf="@id/guideline_name"
-            tools:text="desctri ptiongd ssdfsdfsd вава авав" />
+            tools:text="desctri ptiongd ssdfsdfsd вава авав dfdf fdfdfdf "
+            android:ellipsize="start"
+            />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_stats"

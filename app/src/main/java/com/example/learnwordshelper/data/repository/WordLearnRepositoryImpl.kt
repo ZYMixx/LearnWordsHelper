@@ -8,15 +8,12 @@ import com.example.learnwordshelper.data.maper.WordLearnMapper
 import com.example.learnwordshelper.domain.WordLearn
 import com.example.learnwordshelper.domain.WordLearnRepository
 
-class WordLearnRepositoryImpl(
-    private val application: Application
-    ) : WordLearnRepository {
-
+class WordLearnRepositoryImpl(application: Application) : WordLearnRepository {
 
     private val wordLearnDao = AppDatabase.getInstance(application).wordLearnDao()
     private val mapper = WordLearnMapper()
 
-    override fun getWordLearnById(id : Int): LiveData<WordLearn> {
+    override fun getWordLearnById(id: Int): LiveData<WordLearn> {
         return Transformations.map(wordLearnDao.getWordLearn(id)) {
             mapper.mapDbModelToEntity(it)
         }
@@ -30,9 +27,15 @@ class WordLearnRepositoryImpl(
 
     override fun getListWordLearn(): LiveData<List<WordLearn>> {
         return Transformations.map(wordLearnDao.getWordLearnList()) {
-            it.map{
+            it.map {
                 mapper.mapDbModelToEntity(it)
             }
+        }
+    }
+
+    override suspend fun getAllWordLearnByGroupName(groupName: String): List<WordLearn> {
+        return wordLearnDao.getAllWordLearnByGroupName(groupName).map {
+            mapper.mapDbModelToEntity(it)
         }
     }
 
@@ -47,5 +50,6 @@ class WordLearnRepositoryImpl(
     override suspend fun addWordLearn(wordLearn: WordLearn) {
         wordLearnDao.addLearnWord(mapper.entityToDbModel(wordLearn))
     }
+
 
 }

@@ -7,7 +7,27 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
 
     <color name="firstGroupColor">#FF6200EE</color>
     <color name="secondGroupColor">#FFBB86FC</color>
+
+
+
+    <color name="second_group_color90alpha">#E6BB86FC</color>
+    <color name="first_group_color80alpha">#CC6200EE</color>
 </resources>
+
+<!-- alpha
+    100% — FF 50% — 80
+    95% — F2 45% — 73
+    90% — E6 40% — 66
+    85% — D9 35% — 59
+    80% — CC 30% — 4D
+    75% — BF 25% — 40
+    70% — B3 20% — 33
+    65% — A6 15% — 26
+    60% — 99 10% — 1A
+    55% — 8C 5% — 0D
+
+    -->

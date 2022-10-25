@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    android:elevation="@dimen/cardview_compat_inset_shadow"
+    >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@color/firstGroupColor"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="2dp"
+        android:layout_marginBottom="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_group_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_group_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/secondGroupColor"
+                android:singleLine="true"
+                android:gravity="center"
+                android:hint="имя группы"
+                android:textSize="26dp"
+                android:paddingHorizontal="25dp"
+                android:inputType="textCapWords"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/secondGroupColor"
+                android:gravity="center"
+                android:hint="описание"
+                android:textSize="22dp"
+                android:paddingHorizontal="25dp"
+                android:inputType="textCapWords"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+

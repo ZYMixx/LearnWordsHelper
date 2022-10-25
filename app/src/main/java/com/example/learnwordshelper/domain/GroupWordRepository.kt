@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 
 interface GroupWordRepository {
 
-    fun getGroupWordById(id : Int) : LiveData<GroupWord>
+    fun getGroupWordById(id: Int): LiveData<GroupWord>
 
-    fun getGroupWordByName(name : String) : LiveData<GroupWord>
+    fun getGroupWordByName(name: String): LiveData<GroupWord>
 
-    fun getListGroupWord() : LiveData<List<GroupWord>>
+    fun getListGroupWord(): LiveData<List<GroupWord>>
 
     suspend fun editGroupWord(groupWord: GroupWord)
 

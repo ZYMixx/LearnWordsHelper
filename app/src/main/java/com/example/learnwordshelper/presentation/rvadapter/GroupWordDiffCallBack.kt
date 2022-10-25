@@ -1,4 +1,4 @@
-package com.example.learnwordshelper.presentation.adapter
+package com.example.learnwordshelper.presentation.rvadapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.learnwordshelper.domain.GroupWord

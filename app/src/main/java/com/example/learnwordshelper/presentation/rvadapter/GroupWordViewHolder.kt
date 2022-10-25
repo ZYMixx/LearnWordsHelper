@@ -1,11 +1,8 @@
-package com.example.learnwordshelper.presentation.adapter
+package com.example.learnwordshelper.presentation.rvadapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 class GroupWordViewHolder(val groupViewBinding: ViewBinding)
     : RecyclerView.ViewHolder(groupViewBinding.root) {
-
-
 }

@@ -10,11 +10,14 @@ interface WordLearnRepository {
 
     fun getListWordLearn() : LiveData<List<WordLearn>>
 
+    suspend fun getAllWordLearnByGroupName(groupName : String) : List<WordLearn>
+
     suspend fun editWordLearn(wordLearn: WordLearn)
 
     fun deleteWordLearn(wordLearn: WordLearn)
 
     suspend fun addWordLearn(wordLearn: WordLearn)
+
 
 
 }

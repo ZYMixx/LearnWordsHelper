@@ -8,14 +8,12 @@ import com.example.learnwordshelper.data.maper.WordLearnMapper
 import com.example.learnwordshelper.domain.GroupWord
 import com.example.learnwordshelper.domain.GroupWordRepository
 
-class GroupWordRepositoryImpl (
-    private val application: Application
-) : GroupWordRepository {
+class GroupWordRepositoryImpl(application: Application) : GroupWordRepository {
 
     private val groupWordDao = AppDatabase.getInstance(application).groupWordDao()
     private val mapper = WordLearnMapper()
 
-    override fun getGroupWordById(id : Int): LiveData<GroupWord> {
+    override fun getGroupWordById(id: Int): LiveData<GroupWord> {
         return Transformations.map(groupWordDao.getGroupWord(id)) {
             mapper.mapDbModelToEntity(it)
         }
@@ -29,7 +27,7 @@ class GroupWordRepositoryImpl (
 
     override fun getListGroupWord(): LiveData<List<GroupWord>> {
         return Transformations.map(groupWordDao.getGroupWordList()) {
-            it.map{
+            it.map {
                 mapper.mapDbModelToEntity(it)
             }
         }
@@ -46,6 +44,4 @@ class GroupWordRepositoryImpl (
     override suspend fun addGroupWord(wordLearn: GroupWord) {
         groupWordDao.addGroupWord(mapper.entityToDbModel(wordLearn))
     }
-
-
 }
