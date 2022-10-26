@@ -116,6 +116,9 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
             fastAddWordWithGroup("Enable", "Разрешать", "Programming")
             fastAddWordWithGroup("Query ", "Запрос", "Programming")
             fastAddWordWithGroup("Validation", "Проверка", "Programming")
+            fastAddWordWithGroup("Touch", "Прикасаться", "Programming")
+            fastAddWordWithGroup("Scroll", "Gрокручивать", "Programming")
+            fastAddWordWithGroup("Location", "Положение", "Programming")
 
             fastAddWordWithGroup("Description", "Описание", "Popular")
             fastAddWordWithGroup("Spicy", "Пряный", "Popular")

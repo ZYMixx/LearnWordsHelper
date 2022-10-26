@@ -52,9 +52,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainRv.setOnTouchListener { mainRv, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_UP) {
+                rvAdapter.firstTouchRV = true
                 rvAdapter.scrollInnerRVCallBack = null
             }
-            rvAdapter.scrollInnerRVCallBack?.invoke(motionEvent) ?: mainRv.onTouchEvent(motionEvent)
+            if(rvAdapter.scrollInnerRVCallBack == null){
+                mainRv.onTouchEvent(motionEvent)
+            }
             rvAdapter.scrollInnerRVCallBack?.invoke(motionEvent) ?: mainRv.onTouchEvent(motionEvent)
             true
         }

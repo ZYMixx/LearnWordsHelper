@@ -5,23 +5,26 @@ import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.learnwordshelper.databinding.GroupWordAddNewLayoutBinding
 import com.example.learnwordshelper.databinding.GroupWordCloseLayoutBinding
 import com.example.learnwordshelper.databinding.GroupWordOpenLayoutBinding
 import com.example.learnwordshelper.domain.GroupWord
-import kotlin.concurrent.thread
+import kotlin.math.abs
 
-class WordLearnListAdapter(private val context: Context) :
+class WordLearnListAdapter(context: Context) :
     ListAdapter<GroupWord, GroupWordViewHolder>(GroupWordDiffCallBack) {
 
     var onGroupClickListener: ((GroupWord, Int) -> Unit)? = null
     var onNewGroupAddClickListener: (() -> Unit)? = null
     var scrollInnerRVCallBack: ((MotionEvent) -> Unit)? = null
     val TAG = "WordLearnListAdapter_TAG"
+
+    var firstTouchRV = true
+    var firstTouchY = 0f
+    var parentTouchDifferentY = 0f
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupWordViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -79,19 +82,42 @@ class WordLearnListAdapter(private val context: Context) :
     }
 
     private fun setUpOpenGroupView(binding: GroupWordOpenLayoutBinding, groupWord: GroupWord) {
+
         with(binding) {
             var rvAdapter = WordLearnIntoGroupAdapter()
             wordsIntoGroupRv.adapter = rvAdapter
             rvAdapter.submitList(groupWord.wordList)
             tvGroupName.text = groupWord.name
-            wordsIntoGroupRv.setOnTouchListener { rv, _ ->
-                scrollInnerRVCallBack = { event ->
-                    rv.onTouchEvent(event)
-                }
-                true
-            }
+            setUpSmoothTouchInnerRV(wordsIntoGroupRv)
         }
     }
+
+    private fun setUpSmoothTouchInnerRV(wordsIntoGroupRv: RecyclerView) {
+        var rvNewTouchY = 0f
+        var rvOldTouchY = 0f
+        var rvStartTouchY = 0f
+        wordsIntoGroupRv.setOnTouchListener { rv, motionEvent ->
+            rvNewTouchY = motionEvent.y
+            if (abs(rvOldTouchY - rvNewTouchY) > 40) {
+                rvStartTouchY = rvOldTouchY
+            }
+            rvOldTouchY = rvNewTouchY
+            scrollInnerRVCallBack = { parentTouchEvent ->
+                if (firstTouchRV) {
+                    firstTouchY = parentTouchEvent.y
+                    firstTouchRV = false
+                }
+                parentTouchDifferentY = firstTouchY - parentTouchEvent.y
+                parentTouchEvent.setLocation(
+                    parentTouchEvent.x,
+                    rvStartTouchY - parentTouchDifferentY
+                )
+                rv.onTouchEvent(parentTouchEvent)
+            }
+            true
+        }
+    }
+
 
     private fun setUpAddNewGroupView(binding: GroupWordAddNewLayoutBinding) {
         with(binding) {
